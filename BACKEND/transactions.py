@@ -40,18 +40,26 @@ def deposit():
 @login_required
 def withdraw():
     raw = request.form.get('amount', '').strip()
+
+    # Validation check 1: amount field must not be empty
+    if not raw:
+        flash('Amount is required', 'danger')
+        return redirect(url_for('dashboard.dashboard'))
+
     amount = parse_amount(raw)
 
+    # Validation check 2: amount must be a positive number
     if amount is None:
-        flash('Please enter a valid amount greater than zero.', 'danger')
+        flash('Amount must be greater than zero', 'danger')
         return redirect(url_for('dashboard.dashboard'))
 
     customer_id = session['customer_id']
     account = database.get_account_by_customer_id(customer_id)
     current_balance = account['balance']
 
+    # Validation check 3: amount must not exceed current balance
     if amount > current_balance:
-        flash(f'Insufficient funds. Your balance is ${current_balance:.2f}.', 'danger')
+        flash('Insufficient funds', 'danger')
         return redirect(url_for('dashboard.dashboard'))
 
     new_balance = current_balance - amount
