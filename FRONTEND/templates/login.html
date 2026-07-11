@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login — SecureBank{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-5 col-lg-4">
+    <div class="card shadow-sm mt-5">
+      <div class="card-body p-4">
+        <h4 class="card-title text-center mb-1 fw-bold text-primary">🏦 SecureBank</h4>
+        <p class="text-center text-muted mb-4">Online Banking Portal</p>
+
+        <form method="POST" action="{{ url_for('auth.login') }}">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username"
+                   placeholder="Enter your username" required autofocus>
+          </div>
+          <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password"
+                   placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Sign In</button>
+        </form>
+      </div>
+    </div>
+    <p class="text-center text-muted mt-3 small">Demo credentials: testuser / password123</p>
+  </div>
+</div>
+{% endblock %}

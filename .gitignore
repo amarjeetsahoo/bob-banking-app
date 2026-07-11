@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+BACKEND/banking.db
+.env
+tests/__pycache__/
+.pytest_cache/
+.bob/
+
+docs/
